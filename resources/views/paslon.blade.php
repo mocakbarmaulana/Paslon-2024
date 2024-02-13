@@ -30,7 +30,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             border: 1px solid black;
-            padding: 0 16px;
+            border-right: none;
         }
     </style>
 </head>
@@ -45,7 +45,7 @@
                 <h3>{{ $key }}</h3>
                 <div class="outer-paslon">
                 @foreach($item as $paslon)
-                        <div>
+                        <div style="border-right: 1px solid black; padding: 0 16px;">
                             <h5 class="text-center">{{ $paslon->nama_lengkap }}</h5>
                             <p class="text-center">
                             <span>{{ $paslon->tempat_lahir }}</span>,
