@@ -25,7 +25,7 @@ class PaslonCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): array
     {
         $paslonService = new PaslonService();
         $response = $paslonService->getPaslon();
@@ -33,7 +33,7 @@ class PaslonCommand extends Command
         if (array_key_exists('status', $response)) {
             $this->error($response['message']);
 
-            return;
+            return [];
         }
 
         $paslonPresiden = $paslonService->convertToDtoProfile($response['calon_presiden'], PosisiEnum::PRESIDEN());
@@ -48,8 +48,7 @@ class PaslonCommand extends Command
             return $a->nomor_urut <=> $b->nomor_urut;
         })->toArray();
 
-        $data = $this->convertToTableFormat($data);
-        $this->table(['Nomor Urut', 'Posisi', 'Tempat Lahir', 'Tanggal Lahir', 'Usia', 'Karir'], $data);
+        return $this->convertToTableFormat($data);
     }
 
     private function convertToTableFormat(array $data): array
